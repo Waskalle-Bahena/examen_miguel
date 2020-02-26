@@ -34,8 +34,8 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Nombre</th>
-                                <th>Salario Pesos</th>
                                 <th>Salario Dolares</th>
+                                <th>Salario Pesos</th>
                                 <th>Correo</th>
                                 <th>Estatus</th>
                                 <th>Opciones</th>
@@ -49,6 +49,7 @@
         </div>
     </div>
 </div>
+@include('employees.partials.modal_show')
 @push('js')
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" defer></script>
@@ -70,8 +71,35 @@
                     ]
             });
 
-            
+
         } );
+    </script>
+
+    <script>
+        function showInfo(id)
+        {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "employees/"+ id,
+                method: 'get',
+            }).done(function(response) {
+                console.log("Response modal:",response);
+                $("#employee-modal").modal("show");
+
+                $("#modal-body").append("<p><b>Codigo: </b>" + response.codigo + "</p><br>");
+                $("#modal-body").append("<p><b>Nombre: </b>" + response.nombre + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Dolares: </b>" + response.salarioDolares + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Pesos: </b>" + response.salarioPesos + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Direccion: </b>" + response.direccion + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Telefono: </b>" + response.telefono + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Correo: </b>" + response.correo + "</p><br>");
+
+            });
+
+            //modal-body
+        }
     </script>
     @include('sweet::alert')
 @endpush

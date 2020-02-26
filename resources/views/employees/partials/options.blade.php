@@ -1,10 +1,14 @@
+<a href="#" style="margin-bottom: 10px;" class="btn btn-info" onclick="showInfo({{$employee->id}})">
+    Ver
+</a>
+
 @if($employee->status)
     <a href="#" class="btn btn-danger cli" data-toggle="tooltip" title="Desactivar" onclick="changeStatus({{$employee->id}})">
-        <i class="fa fa-trash"></i>
+        Desactivar
     </a>
 @else
     <a href="#" class="btn btn-success cli" data-toggle="tooltip" title="Activar" onclick="changeStatus({{$employee->id}})">
-        <i class="fa fa-plus"></i>
+        Activar
     </a>
 @endif
 

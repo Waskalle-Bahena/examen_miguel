@@ -69,7 +69,7 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return response()->json($employee);
     }
 
     /**
@@ -119,11 +119,20 @@ class EmployeeController extends Controller
         $employees = Employee::all();
 
         return DataTables::of($employees)
+            ->editColumn('salarioDolares',function($employee) {
+                $amount_formatted = number_format($employee->salarioDolares,2,'.',',');
+                return $amount_formatted;
+            })
             ->editColumn('status', function($employee) {
                 if($employee->status)
                     return "Activo";
                 else
                     return "Inactivo";
+            })
+            ->editColumn('salarioPesos',function($employee) {
+                $amount_formatted = number_format($employee->salarioPesos,2,'.',',');
+
+                return $amount_formatted;
             })
             ->editColumn('options',function($employee) {
                 return view('employees.partials.options',['employee' => $employee]);
