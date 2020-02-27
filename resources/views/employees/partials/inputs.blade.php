@@ -70,14 +70,6 @@
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-    {!! Form::label('status', 'Estatus:', ['class' => 'col-sm-3 control-label']) !!}
-    <div class="col-sm-9">
-        {!! Form::select('status', $options, $selected_status, ['class' => 'form-control', 'required' => 'required']) !!}
-        <small class="text-danger">{{ $errors->first('status') }}</small>
-    </div>
-</div>
-
 @push('js')
     <script>
 
@@ -101,6 +93,9 @@
                 let paridad = dato_actual.dato;
 
                 let salario_dolares = $("#salarioDolares").val();
+
+                console.log("Dolares: ",salario_dolares);
+                console.log("Paridad: ",paridad);
 
 
                 let cantidad_pesos = (Number(salario_dolares) * Number(paridad));

@@ -2,6 +2,10 @@
     Ver
 </a>
 
+<a href="{{route('employees.edit',$employee->id)}}" style="margin-bottom: 10px;" class="btn btn-success">
+    Editar
+</a>
+
 @if($employee->status)
     <a href="#" class="btn btn-danger cli" data-toggle="tooltip" title="Desactivar" onclick="changeStatus({{$employee->id}})">
         Desactivar

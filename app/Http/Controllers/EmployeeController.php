@@ -31,16 +31,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-
-        $options = [
-            0 => "Inactivo",
-            1 => "Activo"
-        ];
-
-        $selected_status = 1;
-
-        return view('employees.create',["options" => $options,
-                                        "selected_status" => $selected_status]);
+        return view('employees.create');
     }
 
     /**
@@ -69,7 +60,12 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        return response()->json($employee);
+        $data = [
+            'employee' => $employee,
+            'proyection' => $employee->proyection
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -80,7 +76,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('employees.edit', ['employee' => $employee]);
     }
 
     /**
@@ -90,9 +86,15 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(EmployeeRequest $request, Employee $employee)
     {
-        //
+        if($employee->update($request->all())) {
+            alert()->basic('Empleado actualizado correctamente', 'Edición de empleado');
+        } else {
+            alert()->error('Ah ocurrido un error al intentar actualizar el empleado, favor de verificar los campos');
+        }
+
+        return redirect()->route('employees.index');
     }
 
     /**

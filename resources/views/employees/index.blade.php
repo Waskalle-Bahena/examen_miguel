@@ -85,16 +85,30 @@
                 url: "employees/"+ id,
                 method: 'get',
             }).done(function(response) {
-                console.log("Response modal:",response);
                 $("#employee-modal").modal("show");
+                $("#modal-body").html("");
 
-                $("#modal-body").append("<p><b>Codigo: </b>" + response.codigo + "</p><br>");
-                $("#modal-body").append("<p><b>Nombre: </b>" + response.nombre + "</p><br>");
-                $("#modal-body").append("<p><b>Salario Dolares: </b>" + response.salarioDolares + "</p><br>");
-                $("#modal-body").append("<p><b>Salario Pesos: </b>" + response.salarioPesos + "</p><br>");
-                $("#modal-body").append("<p><b>Salario Direccion: </b>" + response.direccion + "</p><br>");
-                $("#modal-body").append("<p><b>Salario Telefono: </b>" + response.telefono + "</p><br>");
-                $("#modal-body").append("<p><b>Salario Correo: </b>" + response.correo + "</p><br>");
+                $("#modal-body").append("<p><b>Codigo: </b>" + response.employee.codigo + "</p><br>");
+                $("#modal-body").append("<p><b>Nombre: </b>" + response.employee.nombre + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Dolares: </b>" + response.employee.salarioDolares + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Pesos: </b>" + response.employee.salarioPesos + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Direccion: </b>" + response.employee.direccion + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Telefono: </b>" + response.employee.telefono + "</p><br>");
+                $("#modal-body").append("<p><b>Salario Correo: </b>" + response.employee.correo + "</p><br>");
+
+                $("#modal-body").append("<hr>");
+                $("#modal-body").append("<h4>Proyección De salario a 6 meses</h4>");
+
+                let proyection = response.proyection;
+
+                $("#modal-body").append("<p><b>Primer Mes: </b>" + proyection[0] + "</p><br>");
+                $("#modal-body").append("<p><b>Segundo Mes: </b>" + proyection[1] + "</p><br>");
+                $("#modal-body").append("<p><b>Tercer Mes: </b>" + proyection[2] + "</p><br>");
+                $("#modal-body").append("<p><b>Cuarto Mes: </b>" + proyection[3] + "</p><br>");
+                $("#modal-body").append("<p><b>Quinto Mes: </b>" + proyection[4] + "</p><br>");
+                $("#modal-body").append("<p><b>Sexto Mes: </b>" + proyection[5] + "</p><br>");
+
+
 
             });
 

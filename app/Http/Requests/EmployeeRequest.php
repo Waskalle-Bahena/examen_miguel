@@ -24,10 +24,10 @@ class EmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            "codigo" => "unique:employees",
+            "codigo" => "unique:employees,codigo,{$this->route('employee')->id}",
             "salarioPesos" => "numeric|min:1",
             "salarioDolares" => "numeric|min:1",
-            "correo" => "unique:employees|email",
+            "correo" => "required|email|unique:employees,correo,{$this->route('employee')->id}",
             "nombre" => "required",
             "direccion" => "required",
             "telefono" => "required",
@@ -40,7 +40,7 @@ class EmployeeRequest extends FormRequest
     {
         return [
             "codigo.unique" => "El código ya existe en el sistema, favor de ingresar otro.",
-            "email.unique" => "El correo ya existe en el sistema, favor de ingresar otro.",
+            "correo.unique" => "El correo ya existe en el sistema, favor de ingresar otro.",
             "salarioDolares.min" => "El salario en dolares debe ser mayor a 0.",
             "salarioPesos.min" => "El salario en pesos debe ser mayor a 0."
         ];
